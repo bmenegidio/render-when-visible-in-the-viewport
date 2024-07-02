@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Render When Visible in the Viewport
 
-## Getting Started
+Um hook customizado do React e um componente render prop para renderizar componentes apenas quando eles estão visíveis na viewport, otimizando o desempenho em páginas onde componentes complexos são renderizados ao montar o componente.
 
-First, run the development server:
+## Índice
+
+- [Descrição](#descrição)
+- [Exemplo de Uso](#exemplo-de-uso)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Instalação](#instalação)
+- [Uso](#uso)
+
+## Descrição
+
+Este projeto fornece um hook customizado do React e um componente render prop para melhorar o desempenho ao renderizar componentes apenas quando eles estão visíveis na viewport. Ele utiliza a Intersection Observer API para determinar a visibilidade.
+
+Essa abordagem pode ser utilizada para:
+- Executar animações apenas quando os componentes estão visíveis na viewport do usuário.
+- Reduzir o carregamento inicial da página, atrasando a renderização de componentes complexos até que eles sejam realmente necessários.
+- Melhorar a experiência do usuário em páginas longas ou de rolagem infinita, onde muitos componentes são carregados dinamicamente.
+
+## Exemplo de Uso
+
+No exemplo fornecido no projeto, estamos utilizando uma chamada para a API [dummyjson](https://dummyjson.com) para listar produtos. À medida que o usuário faz scroll pela página, as categorias e seus respectivos produtos são renderizados na tela somente quando se tornam visíveis na viewport.
+
+O GIF abaixo ilustra esse comportamento. Você pode observar que, na aba "Elementos" do browser, os produtos são renderizados sob demanda, o que demonstra a eficiência desta abordagem em otimizar o desempenho da aplicação.
+
+![Exemplo de Renderização Sob Demanda](public/docs/readme/example.gif)
+
+
+O exemplo contido no projeto utiliza uma chamada para a API [dummyjson](https://dummyjson.com/) para listar produtos. As categorias e seus respectivos produtos só são renderizados na tela quando se tornam visíveis na viewport.
+
+## Tecnologias Utilizadas
+
+- NextJS
+- Intersection Observer API
+- TailwindCSS
+
+## Instalação
+
+Para começar a usar este projeto, clone o repositório e instale as dependências:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/bmenegidio/render-when-visible-in-the-viewport.git
+cd render-when-visible-in-the-viewport
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Uso
+Usando o Componente Render Prop:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```jsx
+import { ShowWhenVisibleProvider } from '@/components/renderProps/showWhenVisible';
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+const MyComponent = () => (
+    <ShowWhenVisibleProvider
+      render={({ isIntersecting }) => <RenderedOnlyWhenVisible />}
+    />
+);
+```
