@@ -1,5 +1,9 @@
 # Render When Visible in the Viewport
 
+![GitHub](https://img.shields.io/github/license/bmenegidio/render-when-visible-in-the-viewport)
+![GitHub top language](https://img.shields.io/github/languages/top/bmenegidio/render-when-visible-in-the-viewport)
+![GitHub repo size](https://img.shields.io/github/repo-size/bmenegidio/render-when-visible-in-the-viewport)
+
 Um hook customizado do React e um componente render prop para renderizar componentes apenas quando eles estão visíveis na viewport, otimizando o desempenho em páginas onde componentes complexos são renderizados ao montar o componente.
 
 ## Índice
